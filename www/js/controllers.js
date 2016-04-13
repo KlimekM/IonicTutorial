@@ -61,6 +61,7 @@ Controller for the favorites page
 */
 .controller('FavoritesCtrl', function($scope, $window, User) {
 	$scope.favorites = User.favorites;
+	$scope.username = User.username;
 
 	$scope.removeSong = function(song, index) {
 		User.removeSongFromFavorites(song, index);
@@ -75,8 +76,14 @@ Controller for the favorites page
 /*
 Controller for our tab bar
 */
-.controller('TabsCtrl', function($scope, User, Recommendations) {
+.controller('TabsCtrl', function($scope, $window, User, Recommendations) {
 	$scope.favCount = User.favoriteCount;
+
+	$scope.logout = function() {
+		User.destroySession();
+
+		$window.location.href = "index.html";
+	}
 
 	$scope.enteringFavorites = function() {
 		User.newFavorites = 0;
