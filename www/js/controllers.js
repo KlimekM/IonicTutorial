@@ -71,8 +71,11 @@ Controller for the favorites page
 /*
 Controller for our tab bar
 */
-.controller('TabsCtrl', function($scope, Recommendations) {
+.controller('TabsCtrl', function($scope, User, Recommendations) {
+	$scope.favCount = User.favoriteCount;
+
 	$scope.enteringFavorites = function() {
+		User.newFavorites = 0;
 		Recommendations.haltAudio();
 	}
 
